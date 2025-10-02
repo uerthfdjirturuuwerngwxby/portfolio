@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samala Nithin | AI & Full-Stack Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --primary: #4f46e5;
+            --primary-light: #6366f1;
+            --primary-dark: #4338ca;
+            --secondary: #10b981;
+            --dark: #1f2937;
+            --light: #f9fafb;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+            transition: all 0.3s ease;
+            background-color: var(--light);
+            color: var(--dark);
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ed 100%);
+        }
+        
+        .skill-tag {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .skill-tag::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s;
+        }
+        
+        .skill-tag:hover::before {
+            left: 100%;
+        }
+        
+        .skill-tag:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .project-card {
+            transition: all 0.3s ease;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .timeline-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 24px;
+            top: 32px;
+            height: calc(100% - 32px);
+            width: 2px;
+            background: #e5e7eb;
+        }
+        
+        .floating {
+            animation: floating 6s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translate(0, 0px) rotate(0deg); }
+            33% { transform: translate(30px, -15px) rotate(120deg); }
+            66% { transform: translate(-20px, 20px) rotate(240deg); }
+            100% { transform: translate(0, 0px) rotate(360deg); }
+        }
+        
+        .floating-slow {
+            animation: floating-slow 8s ease-in-out infinite;
+        }
+        
+        @keyframes floating-slow {
+            0% { transform: translate(0, 0px) scale(1); }
+            50% { transform: translate(-25px, 15px) scale(1.1); }
+            100% { transform: translate(0, 0px) scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px rgba(79, 70, 229, 0.2);
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60%;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Custom scroll-triggered animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .animate-on-scroll-left {
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: all 0.6s ease;
+        }
+        
+        .animate-on-scroll-left.animated {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .animate-on-scroll-right {
+            opacity: 0;
+            transform: translateX(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .animate-on-scroll-right.animated {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .animate-on-scroll-scale {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.6s ease;
+        }
+        
+        .animate-on-scroll-scale.animated {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        /* Color changing animation for skills */
+        @keyframes color-change {
+            0% { background-color: #dbeafe; color: #1e40af; }
+            25% { background-color: #dcfce7; color: #166534; }
+            50% { background-color: #fef3c7; color: #92400e; }
+            75% { background-color: #fce7f3; color: #9d174d; }
+            100% { background-color: #dbeafe; color: #1e40af; }
+        }
+        
+        .color-changing {
+            animation: color-change 8s infinite;
+        }
+        
+        /* Staggered animation for skill items */
+        .skill-item:nth-child(1) { animation-delay: 0s; }
+        .skill-item:nth-child(2) { animation-delay: 0.5s; }
+        .skill-item:nth-child(3) { animation-delay: 1s; }
+        .skill-item:nth-child(4) { animation-delay: 1.5s; }
+        .skill-item:nth-child(5) { animation-delay: 2s; }
+        .skill-item:nth-child(6) { animation-delay: 2.5s; }
+        .skill-item:nth-child(7) { animation-delay: 3s; }
+        .skill-item:nth-child(8) { animation-delay: 3.5s; }
+        .skill-item:nth-child(9) { animation-delay: 4s; }
+        .skill-item:nth-child(10) { animation-delay: 4.5s; }
+        .skill-item:nth-child(11) { animation-delay: 5s; }
+        .skill-item:nth-child(12) { animation-delay: 5.5s; }
+        .skill-item:nth-child(13) { animation-delay: 6s; }
+        .skill-item:nth-child(14) { animation-delay: 6.5s; }
+        .skill-item:nth-child(15) { animation-delay: 7s; }
+        .skill-item:nth-child(16) { animation-delay: 7.5s; }
+
+        /* Mobile menu styles */
+        .mobile-menu {
+            position: fixed;
+            top: 64px;
+            left: 0;
+            width: 100%;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+            z-index: 40;
+        }
+        
+        .mobile-menu.active {
+            transform: translateY(0);
+        }
+        
+        /* Success message styles */
+        .success-message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #10b981;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transform: translateX(150%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .success-message.active {
+            transform: translateX(0);
+        }
+        
+        .error-message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #ef4444;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transform: translateX(150%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .error-message.active {
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white bg-opacity-90 backdrop-blur-sm z-50 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-xl font-bold text-indigo-600">SN</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#home" class="px-3 py-2 rounded-md text-sm font-medium text-indigo-600 hover:bg-indigo-50">Home</a>
+                        <a href="#about" class="px-3 py-2 rounded-md text-sm font-medium text-gray-500 hover:text-indigo-600">About</a>
+                        <a href="#education" class="px-3 py-2 rounded-md text-sm font-medium text-gray-500 hover:text-indigo-600">Education</a>
+                        <a href="#skills" class="px-3 py-2 rounded-md text-sm font-medium text-gray-500 hover:text-indigo-600">Skills</a>
+                        <a href="#projects" class="px-3 py-2 rounded-md text-sm font-medium text-gray-500 hover:text-indigo-600">Projects</a>
+                        <a href="#contact" class="px-3 py-2 rounded-md text-sm font-medium text-gray-500 hover:text-indigo-600">Contact</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-500 hover:text-indigo-600 focus:outline-none">
+                        <i data-feather="menu"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu md:hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="block px-3 py-2 rounded-md text-base font-medium text-indigo-600 hover:bg-indigo-50">Home</a>
+                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-gray-500 hover:text-indigo-600 hover:bg-gray-50">About</a>
+                <a href="#education" class="block px-3 py-2 rounded-md text-base font-medium text-gray-500 hover:text-indigo-600 hover:bg-gray-50">Education</a>
+                <a href="#skills" class="block px-3 py-2 rounded-md text-base font-medium text-gray-500 hover:text-indigo-600 hover:bg-gray-50">Skills</a>
+                <a href="#projects" class="block px-3 py-2 rounded-md text-base font-medium text-gray-500 hover:text-indigo-600 hover:bg-gray-50">Projects</a>
+                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-gray-500 hover:text-indigo-600 hover:bg-gray-50">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Success/Error Messages -->
+    <div id="success-message" class="success-message">
+        <div class="flex items-center">
+            <i data-feather="check-circle" class="mr-2"></i>
+            <span>Message sent successfully!</span>
+        </div>
+    </div>
+    
+    <div id="error-message" class="error-message">
+        <div class="flex items-center">
+            <i data-feather="alert-circle" class="mr-2"></i>
+            <span>Failed to send message. Please try again.</span>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-bg pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        <!-- Enhanced background circles with better visibility -->
+        <div class="absolute inset-0 opacity-30">
+            <div class="absolute top-10 left-10 w-24 h-24 bg-indigo-300 rounded-full floating"></div>
+            <div class="absolute top-40 right-20 w-20 h-20 bg-green-300 rounded-full floating-slow" style="animation-delay: 1s;"></div>
+            <div class="absolute bottom-20 left-1/4 w-28 h-28 bg-purple-300 rounded-full floating" style="animation-delay: 2s;"></div>
+            <div class="absolute top-1/3 right-1/4 w-16 h-16 bg-yellow-300 rounded-full floating-slow" style="animation-delay: 3s;"></div>
+            <div class="absolute bottom-1/3 left-3/4 w-22 h-22 bg-pink-300 rounded-full floating" style="animation-delay: 4s;"></div>
+            <div class="absolute top-2/3 left-1/2 w-18 h-18 bg-blue-300 rounded-full floating-slow" style="animation-delay: 5s;"></div>
+        </div>
+        
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0 animate-on-scroll-left" id="hero-text">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4">Samala Nithin</h1>
+                    <h2 class="text-xl md:text-2xl text-gray-600 mb-6">Computer Science Undergraduate | AI & Full-Stack Developer</h2>
+                    
+                    <!-- About Me Section -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm mb-8 hover-lift">
+                        <h3 class="text-lg font-semibold mb-3 text-indigo-600">About Me</h3>
+                        <p class="text-gray-600 mb-4">
+                            Motivated Computer Science undergraduate with a passion for problem-solving, AI, and full-stack development. Skilled in designing, building, and deploying scalable applications. Known for strong adaptability, teamwork, and quick learning.
+                        </p>
+                        <p class="text-gray-600">
+                            Committed to applying technical expertise to create impactful, real-world solutions. When I'm not coding, you can find me participating in competitive programming contests or enjoying Formula 1 races and cricket matches.
+                        </p>
+                    </div>
+                    
+                    <div class="flex space-x-4">
+                        <a href="mailto:samalanithin18@gmail.com" class="btn-primary px-6 py-3 rounded-lg transition flex items-center">
+                            <i data-feather="mail" class="mr-2"></i> Email Me
+                        </a>
+                        <a href="https://linkedin.com/in/samala-nithin-b60a19338/" target="_blank" class="px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition flex items-center hover-lift">
+                            <i data-feather="linkedin" class="mr-2"></i> LinkedIn
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center animate-on-scroll-right" id="hero-image">
+                    <div class="relative">
+                        <div class="w-64 h-64 md:w-80 md:h-80 bg-gradient-to-r from-indigo-400 to-purple-500 rounded-full flex items-center justify-center pulse">
+                            <div class="w-60 h-60 md:w-72 md:h-72 bg-white rounded-full flex items-center justify-center overflow-hidden shadow-xl">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Nithin" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <div class="absolute -bottom-4 -right-4 bg-white p-4 rounded-xl shadow-lg">
+                            <div class="flex items-center">
+                                <div class="w-3 h-3 bg-green-500 rounded-full mr-2"></div>
+                                <span class="text-sm font-medium">Available for opportunities</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold mb-12 text-center section-title animate-on-scroll">Education</h2>
+            <div class="space-y-8">
+                <div class="timeline-item relative pl-16 animate-on-scroll-left" data-delay="0">
+                    <div class="absolute left-0 top-0 flex items-center justify-center w-12 h-12 rounded-full bg-indigo-100 text-indigo-600 shadow-md">
+                        <i data-feather="award"></i>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm hover-lift">
+                        <h3 class="text-xl font-semibold">Bachelor of Technology in Computer Science and Engineering</h3>
+                        <p class="text-gray-600">Neil Gogte Institute of Technology • 2022 – 2026</p>
+                        <p class="mt-2 text-indigo-600 font-medium">Current CGPA: 8.5/10</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item relative pl-16 animate-on-scroll-left" data-delay="100">
+                    <div class="absolute left-0 top-0 flex items-center justify-center w-12 h-12 rounded-full bg-indigo-100 text-indigo-600 shadow-md">
+                        <i data-feather="book"></i>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm hover-lift">
+                        <h3 class="text-xl font-semibold">Intermediate Education</h3>
+                        <p class="text-gray-600">SR Jr. College • 2020 - 2022</p>
+                        <p class="mt-2 text-indigo-600 font-medium">Percentage: 94.5%</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item relative pl-16 animate-on-scroll-left" data-delay="200">
+                    <div class="absolute left-0 top-0 flex items-center justify-center w-12 h-12 rounded-full bg-indigo-100 text-indigo-600 shadow-md">
+                        <i data-feather="home"></i>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm hover-lift">
+                        <h3 class="text-xl font-semibold">Secondary School Education</h3>
+                        <p class="text-gray-600">Nalanda High School • 2020</p>
+                        <p class="mt-2 text-indigo-600 font-medium">CGPA: 10/10</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold mb-12 text-center section-title animate-on-scroll">Technical Skills</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <div class="skill-tag skill-item color-changing px-4 py-3 rounded-lg text-center font-medium shadow-sm animate-on-scroll-scale" data-delay="0">Java</div>
+                <div class="skill-tag skill-item color-changing px-4 py-3 rounded-lg text-center font-medium shadow-sm animate-on-scroll-scale" data-delay="50">Python</div>
+                <div class="skill-tag skill-item color-changing px-4 py-3 rounded-lg text-center font-medium shadow-sm animate-on-scroll-scale" data-delay="100">C</div>
+                <div class="skill-tag skill-item color-changing px-4 py-3 rounded-lg text-center font-medium shadow-sm animate-on-scroll-scale" data-delay="150">JavaScript</div>
+                <div class="skill-tag skill-item color-changing px-4 py-3 rounded-lg text-center font-medium shadow-sm animate-on-scroll-scale" data-delay="200">HTML</div>
+                <div class="skill-tag skill-item color-changing px-4 py-3 rounded-lg text-center font-medium shadow-sm animate-on-scroll-scale" data-delay="250">CSS</div>
+                <div class="skill-tag skill-item color-changing px-4 py-3 rounded-lg text-center font-medium shadow-sm animate-on-scroll-scale" data-delay="300">React</div>
+                <div class="skill-tag skill-item color-changing px-4 py-3 rounded-lg text-center font-medium shadow-sm animate-on-scroll-scale" data-delay="350">MySQL</div>
+                <div class="skill-tag skill-item color-changing px-4 py-3 rounded-lg text-center font-medium shadow-sm animate-on-scroll-scale" data-delay="400">DSA</div>
+                <div class="skill-tag skill-item color-changing px-4 py-3 rounded-lg text-center font-medium shadow-sm animate-on-scroll-scale" data-delay="450">OOPS</div>
+                <div class="skill-tag skill-item color-changing px-4 py-3 rounded-lg text-center font-medium shadow-sm animate-on-scroll-scale" data-delay="500">AI-ML</div>
+                <div class="skill-tag skill-item color-changing px-4 py-3 rounded-lg text-center font-medium shadow-sm animate-on-scroll-scale" data-delay="550">Scikit-learn</div>
+                <div class="skill-tag skill-item color-changing px-4 py-3 rounded-lg text-center font-medium shadow-sm animate-on-scroll-scale" data-delay="600">Pandas</div>
+                <div class="skill-tag skill-item color-changing px-4 py-3 rounded-lg text-center font-medium shadow-sm animate-on-scroll-scale" data-delay="650">FAISS</div>
+                <div class="skill-tag skill-item color-changing px-4 py-3 rounded-lg text-center font-medium shadow-sm animate-on-scroll-scale" data-delay="700">LangChain</div>
+                <div class="skill-tag skill-item color-changing px-4 py-3 rounded-lg text-center font-medium shadow-sm animate-on-scroll-scale" data-delay="750">NLTK</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl font-bold mb-12 text-center section-title animate-on-scroll">Featured Projects</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="project-card bg-white animate-on-scroll" data-delay="0">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="PDF Q&A System" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">PDF Q&A with RAG</h3>
+                        <p class="text-gray-600 mb-4">Smart web application that allows users to upload PDF files and ask questions from the PDF using Retrieval-Augmented Generation.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs">Python</span>
+                            <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs">FAISS</span>
+                            <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-xs">LangChain</span>
+                            <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-xs">Word2Vec</span>
+                        </div>
+                        <a href="https://instasummarizer.onrender.com/" target="_blank" class="text-indigo-600 hover:text-indigo-800 font-medium flex items-center">
+                            View Project <i data-feather="arrow-right" class="ml-2 w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="project-card bg-white animate-on-scroll" data-delay="100">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1611605698335-8b1569810432?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1774&q=80" alt="Spam Detection" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Spam Detection using ML</h3>
+                        <p class="text-gray-600 mb-4">Intelligent spam detection system capable of classifying messages as spam or ham in real time using NLP and Naive Bayes models.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs">Python</span>
+                            <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs">NLP</span>
+                            <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-xs">Scikit-learn</span>
+                            <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-xs">NLTK</span>
+                        </div>
+                        <a href="#" class="text-indigo-600 hover:text-indigo-800 font-medium flex items-center">
+                            View Project <i data-feather="arrow-right" class="ml-2 w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="project-card bg-white animate-on-scroll" data-delay="200">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1611&q=80" alt="Expense Tracker" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Expense Tracker</h3>
+                        <p class="text-gray-600 mb-4">Full-stack finance management application with React frontend and Node.js backend for tracking and categorizing expenses.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs">React</span>
+                            <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs">Node.js</span>
+                            <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-xs">MongoDB</span>
+                            <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-xs">Express</span>
+                        </div>
+                        <a href="#" class="text-indigo-600 hover:text-indigo-800 font-medium flex items-center">
+                            View Project <i data-feather="arrow-right" class="ml-2 w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold mb-12 text-center section-title animate-on-scroll">Certifications</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm flex items-start hover-lift animate-on-scroll-left" data-delay="0">
+                    <div class="bg-indigo-100 p-3 rounded-lg mr-4">
+                        <i data-feather="code" class="text-indigo-600 w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold">HackerRank Java (Basic)</h3>
+                        <p class="text-gray-600 mt-1">Issued: 2022</p>
+                        <a href="https://www.hackerrank.com/certificates/542820c14618" target="_blank" class="text-indigo-600 hover:text-indigo-800 text-sm mt-2 inline-block">View Certificate</a>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm flex items-start hover-lift animate-on-scroll-right" data-delay="100">
+                    <div class="bg-indigo-100 p-3 rounded-lg mr-4">
+                        <i data-feather="database" class="text-indigo-600 w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold">HackerRank SQL (Intermediate)</h3>
+                        <p class="text-gray-600 mt-1">Issued: 2025</p>
+                        <a href="https://www.hackerrank.com/certificates/86686c543024" target="_blank" class="text-indigo-600 hover:text-indigo-800 text-sm mt-2 inline-block">View Certificate</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8 gradient-bg text-white">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold mb-12 text-center section-title animate-on-scroll">Get In Touch</h2>
+            <div class="bg-white p-8 rounded-xl shadow-lg text-gray-800 animate-on-scroll-scale">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4 text-indigo-600">Contact Information</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <div class="bg-indigo-100 p-2 rounded-lg mr-4">
+                                    <i data-feather="mail" class="text-indigo-600 w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <p class="text-gray-600">Email</p>
+                                    <a href="mailto:samalanithin18@gmail.com" class="text-indigo-600 hover:text-indigo-800">samalanithin18@gmail.com</a>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <div class="bg-indigo-100 p-2 rounded-lg mr-4">
+                                    <i data-feather="linkedin" class="text-indigo-600 w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <p class="text-gray-600">LinkedIn</p>
+                                    <a href="https://linkedin.com/in/samala-nithin-b60a19338/" target="_blank" class="text-indigo-600 hover:text-indigo-800">linkedin.com/in/samala-nithin</a>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <div class="bg-indigo-100 p-2 rounded-lg mr-4">
+                                    <i data-feather="github" class="text-indigo-600 w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <p class="text-gray-600">GitHub</p>
+                                    <a href="https://github.com/uerthfdjirturuuwerngwxby?tab=repositories" target="_blank" class="text-indigo-600 hover:text-indigo-800">github.com/uerthfdjirturuuwerngwxby</a>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <div class="bg-indigo-100 p-2 rounded-lg mr-4">
+                                    <i data-feather="phone" class="text-indigo-600 w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <p class="text-gray-600">Phone</p>
+                                    <a href="tel:+919666863781" class="text-indigo-600 hover:text-indigo-800">+91 9666 863 781</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4 text-indigo-600">Send a Message</h3>
+                        <form id="contact-form" class="space-y-4">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                                <input type="text" id="name" name="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500" required>
+                            </div>
+                            
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                                <input type="email" id="email" name="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500" required>
+                            </div>
+                            
+                            <div>
+                                <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message</label>
+                                <textarea id="message" name="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500" required></textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn-primary w-full px-6 py-3 rounded-lg transition">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 px-4 sm:px-6 lg:px-8 bg-white border-t">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <span class="text-xl font-bold text-indigo-600">Samala Nithin</span>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="mailto:samalanithin18@gmail.com" class="text-gray-600 hover:text-indigo-600">
+                        <i data-feather="mail"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/samala-nithin-b60a19338/" target="_blank" class="text-gray-600 hover:text-indigo-600">
+                        <i data-feather="linkedin"></i>
+                    </a>
+                    <a href="https://github.com/uerthfdjirturuuwerngwxby?tab=repositories" target="_blank" class="text-gray-600 hover:text-indigo-600">
+                        <i data-feather="github"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="mt-8 text-center text-gray-500 text-sm">
+                <p>© 2023 Samala Nithin. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        feather.replace();
+        
+        // Mobile menu functionality
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', function() {
+            mobileMenu.classList.toggle('active');
+            
+            // Change icon based on menu state
+            const icon = mobileMenuButton.querySelector('i');
+            if (mobileMenu.classList.contains('active')) {
+                feather.icons['x'].replace(icon);
+            } else {
+                feather.icons['menu'].replace(icon);
+            }
+        });
+        
+        // Close mobile menu when clicking on a link
+        const mobileMenuLinks = document.querySelectorAll('#mobile-menu a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mobileMenu.classList.remove('active');
+                const icon = mobileMenuButton.querySelector('i');
+                feather.icons['menu'].replace(icon);
+            });
+        });
+        
+        // Custom scroll animation function
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.animate-on-scroll, .animate-on-scroll-left, .animate-on-scroll-right, .animate-on-scroll-scale');
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementBottom = element.getBoundingClientRect().bottom;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible && elementBottom > elementVisible) {
+                    // Add delay if specified
+                    const delay = element.getAttribute('data-delay') || 0;
+                    setTimeout(() => {
+                        element.classList.add('animated');
+                    }, delay);
+                } else {
+                    // Remove the class when element is out of view
+                    element.classList.remove('animated');
+                }
+            });
+        }
+        
+        // Run on load and scroll
+        window.addEventListener('load', animateOnScroll);
+        window.addEventListener('scroll', animateOnScroll);
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu after clicking a link
+                    if (mobileMenu.classList.contains('active')) {
+                        mobileMenu.classList.remove('active');
+                        const icon = mobileMenuButton.querySelector('i');
+                        feather.icons['menu'].replace(icon);
+                    }
+                }
+            });
+        });
+        
+        // Contact form submission
+        const contactForm = document.getElementById('contact-form');
+        const successMessage = document.getElementById('success-message');
+        const errorMessage = document.getElementById('error-message');
+        
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(contactForm);
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const message = formData.get('message');
+            
+            // Create email body
+            const subject = `Portfolio Contact Form: Message from ${name}`;
+            const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMessage:%0D%0A${message}`;
+            
+            // Open default email client
+            const mailtoLink = `mailto:samalanithin18@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            window.location.href = mailtoLink;
+            
+            // Show success message
+            showMessage(successMessage);
+            
+            // Reset form
+            contactForm.reset();
+        });
+        
+        // Function to show success/error message
+        function showMessage(messageElement) {
+            messageElement.classList.add('active');
+            
+            // Hide message after 5 seconds
+            setTimeout(() => {
+                messageElement.classList.remove('active');
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
